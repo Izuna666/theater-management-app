@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\theater-management-app\\teatr\\teatr\\teatr.csproj",
-      "projectName": "teatr",
-      "projectPath": "C:\\projects\\theater-management-app\\teatr\\teatr\\teatr.csproj",
+      "projectUniqueName": "C:\\projects\\theater-management-app\\teatr\\teatr\\okno_logowania.csproj",
+      "projectName": "okno_logowania",
+      "projectPath": "C:\\projects\\theater-management-app\\teatr\\teatr\\okno_logowania.csproj",
       "packagesPath": "C:\\Users\\Mikul\\.nuget\\packages\\",
       "outputPath": "C:\\projects\\theater-management-app\\teatr\\teatr\\obj\\",
       "projectStyle": "PackageReference",
@@ -65,7 +65,7 @@
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
+          "Microsoft.WindowsDesktop.App.WPF": {
             "privateAssets": "none"
           }
         },

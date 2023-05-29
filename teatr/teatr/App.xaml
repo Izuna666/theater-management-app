@@ -1,0 +1,9 @@
+﻿<Application x:Class="okno_logowania.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:okno_logowania"
+             StartupUri="View/LoginView.xaml">  <!-- ustawia domyslne okno ktore wlacza sie przy uruchomieniu do nazego okna loginview -->
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
