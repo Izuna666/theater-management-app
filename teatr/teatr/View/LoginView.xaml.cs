@@ -18,9 +18,6 @@ using MySql.Data.MySqlClient;
 
 namespace okno_logowania.View
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LoginView.xaml
-    /// </summary>
     public partial class LoginView : Window
     {
         public LoginView()
@@ -47,7 +44,11 @@ namespace okno_logowania.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string user= txtUserName.Text;
+            Login();
+        }
+        private void Login()
+        {
+            string user = txtUserName.Text;
             string password = txtUserPassword.Password;
             string connectionString = "server=localhost;port=3306;database=Login;uid=root;password=yhym2137;";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -55,13 +56,13 @@ namespace okno_logowania.View
 
             try
             {
-                String querry = "SELECT * FROM login WHERE Username = '" + txtUserName.Text + "' AND Password = '"+txtUserPassword.Password+"'";
+                String querry = "SELECT * FROM login WHERE Username = '" + txtUserName.Text + "' AND Password = '" + txtUserPassword.Password + "'";
                 MySqlDataAdapter sda = new MySqlDataAdapter(querry, connection);
 
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
-                if(dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0)
                 {
                     user = txtUserName.Text;
                     password = txtUserPassword.Password;
@@ -89,17 +90,6 @@ namespace okno_logowania.View
             {
                 connection.Close();
             }
-
-            /*if (txtUserName.Text == "admin" & txtUserPassword.Password == "1234")
-            {
-                MainWindow objMainWindow = new MainWindow();
-                //this.Visibility = Visibility.Hidden;
-                objMainWindow.Show();
-                this.Close();
-            }
-            else
-                invalidLogin.Text = "invalid login or password, try again";*/
-
         }
     }
 }

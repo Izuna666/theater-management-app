@@ -14,8 +14,37 @@
         Background="Transparent"
         AllowsTransparency="True">
 
+    <Window.Resources>
+        <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#462AD8" Offset="0"/>
+            <GradientStop Color="#DA34AE" Offset="0.75"/>
+            <GradientStop Color="#8A16C1" Offset="0.9"/>
+        </LinearGradientBrush>
 
-    <Border CornerRadius="5"
+        <LinearGradientBrush x:Key="HeaderBorderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#462AD8" Offset="0"/>
+            <GradientStop Color="#DA34AE" Offset="0.75"/>
+            <GradientStop Color="#8A16C1" Offset="0.9"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="BorderThickness" Value="0,0,1,0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+        </Window.Resources>
+
+
+
+
+        <Border CornerRadius="5"
             Background="#1B1448"
             BorderThickness="5">
         <Border.BorderBrush>
@@ -183,7 +212,7 @@
                         Orientation="Vertical"
                         Margin="74,0,74,185">
                 <TextBlock Text="godzina:"
-                           Foreground="DarkGray"
+                           Foreground="White"
                            FontSize="16"
                            FontWeight="Medium"
                            FontFamily="Monterrat"
@@ -206,7 +235,7 @@
                     </TextBox.Background>
                 </TextBox>
                 <TextBlock Text="sala:"
-                           Foreground="DarkGray"
+                           Foreground="White"
                            FontSize="16"
                            FontWeight="Medium"
                            FontFamily="Monterrat"
@@ -230,7 +259,7 @@
                 </TextBox>
 
                 <TextBlock Text="nazwa:"
-                           Foreground="DarkGray"
+                           Foreground="White"
                            FontSize="16"
                            FontWeight="Medium"
                            FontFamily="Monterrat"
@@ -254,7 +283,7 @@
                 </TextBox>
 
                 <TextBlock Text="liczba miejsc:"
-                           Foreground="DarkGray"
+                           Foreground="White"
                            FontSize="16"
                            FontWeight="Medium"
                            FontFamily="Monterrat"
@@ -278,7 +307,7 @@
                 </TextBox>
 
                 <TextBlock Text="cena:"
-                           Foreground="DarkGray"
+                           Foreground="White"
                            FontSize="16"
                            FontWeight="Medium"
                            FontFamily="Monterrat"
@@ -303,11 +332,38 @@
 
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1"/>
+
             <DataGrid x:Name="dataGrid1" 
+                      ColumnHeaderStyle="{StaticResource HeaderStyle}"
+                      
                       Background="Transparent"
+                      RowBackground="Transparent"
+                      
+                      AlternatingRowBackground="#462AD8"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
                       Grid.Column="3" 
                       Grid.Row="1"
-                      Margin="24,0,0,165"/>
+                      Margin="24,0,0,165" 
+                      Foreground="White"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Select">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Godzina" Binding="{Binding Path=Godzina}" />
+                    <DataGridTextColumn Header="Sala" Binding="{Binding Path=Sala}" />
+                    <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Nazwa}" />
+                    <DataGridTextColumn Header="Liczba miejsc" Binding="{Binding Path=LiczbaMiejsc}" />
+                    <DataGridTextColumn Header="Cena" Binding="{Binding Path=Cena}" />
+                </DataGrid.Columns>
+                      
+                
+            </DataGrid>
             <StackPanel Width="300"
                         Grid.Column="3"
                         Grid.Row="1"
