@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 public class Repertuar
 {
-    /*public bool IsSelected { get; set; }*/
     public int ID { get; set; }
     public string? Godzina { get; set; }
     public string? Sala { get; set; }
