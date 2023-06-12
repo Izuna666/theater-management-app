@@ -212,18 +212,22 @@ namespace okno_logowania.View
         {
             try
             {
-                string godzina = txtGodzina.Text;
-                repertuarRepository.RemoveRepertuar(godzina);
-                ClearText();
+                if(dataGrid1.SelectedItem != null)
+                {
+                    Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
+                    repertuarRepository.RemoveRepertuar(selectedRepertuar.ID);
+                    ClearText();
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show($"Error: {ex.Message}");
             }
             finally
             {
                 LoadDataIntoGrid();
             }
+            
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -256,6 +260,8 @@ namespace okno_logowania.View
 
     public class Repertuar
     {
+        public bool IsSelected { get; set; }
+        public int ID { get; set; }
         public string? Godzina { get; set; }
         public string? Sala { get; set; }
         public string? Nazwa { get; set; }
@@ -272,19 +278,19 @@ namespace okno_logowania.View
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO repertuar (godzina, sala, nazwa, liczbaMiejsc, cena) " +
+                string query = "INSERT INTO repertuar ( godzina, sala, nazwa, liczbaMiejsc, cena) " +
                                $"VALUES ('{repertuar.Godzina}', '{repertuar.Sala}', '{repertuar.Nazwa}', '{repertuar.LiczbaMiejsc}', '{repertuar.Cena}')";
                 MySqlCommand createCommand = new MySqlCommand(query, connection);
                 createCommand.ExecuteNonQuery();
             }
         }
 
-        public void RemoveRepertuar(string godzina)
+        public void RemoveRepertuar(int ID)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string query = $"DELETE FROM repertuar WHERE godzina = '{godzina}'";
+                string query = $"DELETE FROM repertuar WHERE ID = {ID}";
                 MySqlCommand createCommand = new MySqlCommand(query, connection);
                 createCommand.ExecuteNonQuery();
             }
@@ -297,7 +303,7 @@ namespace okno_logowania.View
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT godzina, sala, nazwa, liczbaMiejsc, cena FROM repertuar";
+                string query = "SELECT ID, godzina, sala, nazwa, liczbaMiejsc, cena FROM repertuar";
                 MySqlCommand createCommand = new MySqlCommand(query, connection);
                 using (MySqlDataReader reader = createCommand.ExecuteReader())
                 {
@@ -305,6 +311,7 @@ namespace okno_logowania.View
                     {
                         Repertuar repertuar = new Repertuar()
                         {
+                            ID = reader.GetInt16("ID"),
                             Godzina = reader.GetString("godzina"),
                             Sala = reader.GetString("sala"),
                             Nazwa = reader.GetString("nazwa"),
