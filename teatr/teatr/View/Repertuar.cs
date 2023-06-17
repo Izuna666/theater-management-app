@@ -44,6 +44,17 @@ public class RepertuarRepository
         }
     }
 
+    public void UpdateRepertuar(Repertuar repertuar, int ID)
+    {
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+            string query = $"UPDATE repertuar SET godzina = '{repertuar.Godzina}', sala = '{repertuar.Sala}', nazwa= '{repertuar.Nazwa}', liczbaMiejsc= '{repertuar.LiczbaMiejsc}', cena= '{repertuar.Cena}' WHERE ID = {ID}";
+            MySqlCommand createCommand = new MySqlCommand(query, connection);
+            createCommand.ExecuteNonQuery ();
+        }
+    }
+
     public List<Repertuar> GetRepertuarList()
     {
         List<Repertuar> repertuarList = new List<Repertuar>();

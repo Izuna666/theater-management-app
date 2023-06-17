@@ -71,7 +71,31 @@ namespace okno_logowania.View
         }
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (dataGrid1.SelectedItem != null)
+                {
+                    Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
+                    Repertuar updatedRepertuar = new Repertuar()
+                    {
+                        Godzina = txtGodzina.Text,
+                        Sala = txtSala.Text,
+                        Nazwa = txtNazwa.Text,
+                        LiczbaMiejsc = txtLiczba.Text,
+                        Cena = txtCena.Text
+                    };
+                    repertuarRepository.UpdateRepertuar(updatedRepertuar, selectedRepertuar.ID);
+                    ClearText();
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+            finally
+            {
+                LoadDataIntoGrid();
+            }
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
