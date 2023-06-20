@@ -1,9 +1,10 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Reflection.Metadata;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MySql.Data.MySqlClient;
 
@@ -12,14 +13,42 @@ namespace okno_logowania.View
     public partial class MainWindow : Window
     {
         private RepertuarRepository repertuarRepository;
+        private SaleRepository saleRepository;
 
         public MainWindow()
         {
             InitializeComponent();
             txtGodzina.Focus();
             repertuarRepository = new RepertuarRepository();
+            saleRepository = new SaleRepository();
             LoadDataIntoGrid();
+            LoadDataToComobox();
+            combobox1.SelectionChanged += combobox1_SelectionChanged;
         }
+
+        private void LoadDataToComobox()
+        {
+            try
+            {
+                List<SalaClass> salaList = saleRepository.GetSaleList();
+                combobox1.ItemsSource = salaList;
+                combobox1.DisplayMemberPath = "Nazwa";
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void combobox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (combobox1.SelectedItem is SalaClass selectedSala)
+            {
+                txtMiejsca.Text = selectedSala.LiczbaMiejsc;
+            }
+        }
+
+
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -51,7 +80,7 @@ namespace okno_logowania.View
                 Repertuar repertuar = new Repertuar()
                 {
                     Godzina = txtGodzina.Text,
-                    Sala = txtSala.Text,
+                    Sala = combobox1.Text,
                     Nazwa = txtNazwa.Text,
                     LiczbaMiejsc = txtLiczba.Text,
                     Cena = txtCena.Text
@@ -79,7 +108,7 @@ namespace okno_logowania.View
                     Repertuar updatedRepertuar = new Repertuar()
                     {
                         Godzina = txtGodzina.Text,
-                        Sala = txtSala.Text,
+                        Sala = combobox1.Text,
                         Nazwa = txtNazwa.Text,
                         LiczbaMiejsc = txtLiczba.Text,
                         Cena = txtCena.Text
@@ -102,14 +131,14 @@ namespace okno_logowania.View
         {
             try
             {
-                if(dataGrid1.SelectedItem != null)
+                if (dataGrid1.SelectedItem != null)
                 {
                     Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
                     repertuarRepository.RemoveRepertuar(selectedRepertuar.ID);
                     ClearText();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
@@ -117,7 +146,19 @@ namespace okno_logowania.View
             {
                 LoadDataIntoGrid();
             }
-            
+
+        }
+        private void LoadDataintoTextBox()
+        {
+            if(dataGrid1.SelectedItem != null)
+            {
+                Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
+                txtGodzina.Text = selectedRepertuar.Godzina;
+                combobox1.Text = selectedRepertuar.Sala;
+                txtNazwa.Text = selectedRepertuar.Nazwa;
+                txtLiczba.Text = selectedRepertuar.LiczbaMiejsc;
+                txtCena.Text = selectedRepertuar.Cena;
+            }
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -141,11 +182,11 @@ namespace okno_logowania.View
         private void ClearText()
         {
             txtGodzina.Clear();
-            txtSala.Clear();
+            //txtSala.Clear();
             txtNazwa.Clear();
             txtLiczba.Clear();
             txtCena.Clear();
         }
+
     }
 }
-

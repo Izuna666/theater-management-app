@@ -1,14 +1,16 @@
-﻿using MySql.Data.MySqlClient;
-using okno_logowania.View;
+﻿using okno_logowania.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Xml.Linq;
 
 
 public class Repertuar
 {
+    /*public bool IsSelected { get; set; }*/
     public int ID { get; set; }
     public string? Godzina { get; set; }
     public string? Sala { get; set; }
@@ -16,6 +18,7 @@ public class Repertuar
     public string? LiczbaMiejsc { get; set; }
     public string? Cena { get; set; }
 }
+
 
 public class RepertuarRepository
 {
@@ -27,7 +30,7 @@ public class RepertuarRepository
         {
             connection.Open();
             string query = "INSERT INTO repertuar ( godzina, sala, nazwa, liczbaMiejsc, cena) " +
-                           $"VALUES ('{repertuar.Godzina}', '{repertuar.Sala}', '{repertuar.Nazwa}', '{repertuar.LiczbaMiejsc}', '{repertuar.Cena}')";
+            $"VALUES ('{repertuar.Godzina}', '{repertuar.Sala}', '{repertuar.Nazwa}', '{repertuar.LiczbaMiejsc}', '{repertuar.Cena}')";
             MySqlCommand createCommand = new MySqlCommand(query, connection);
             createCommand.ExecuteNonQuery();
         }
@@ -48,10 +51,10 @@ public class RepertuarRepository
     {
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
-            connection.Open();
+            connection.Open();            
             string query = $"UPDATE repertuar SET godzina = '{repertuar.Godzina}', sala = '{repertuar.Sala}', nazwa= '{repertuar.Nazwa}', liczbaMiejsc= '{repertuar.LiczbaMiejsc}', cena= '{repertuar.Cena}' WHERE ID = {ID}";
             MySqlCommand createCommand = new MySqlCommand(query, connection);
-            createCommand.ExecuteNonQuery ();
+            createCommand.ExecuteNonQuery();
         }
     }
 

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\theater-management-app\\teatr\\teatr\\okno_logowania.csproj",
+      "projectUniqueName": "C:\\Users\\Mikul\\Desktop\\theater-manag3ement-app-Adrian\\theater-management-app-Adrian\\teatr\\teatr\\okno_logowania.csproj",
       "projectName": "okno_logowania",
-      "projectPath": "C:\\projects\\theater-management-app\\teatr\\teatr\\okno_logowania.csproj",
+      "projectPath": "C:\\Users\\Mikul\\Desktop\\theater-manag3ement-app-Adrian\\theater-management-app-Adrian\\teatr\\teatr\\okno_logowania.csproj",
       "packagesPath": "C:\\Users\\Mikul\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\theater-management-app\\teatr\\teatr\\obj\\",
+      "outputPath": "C:\\Users\\Mikul\\Desktop\\theater-manag3ement-app-Adrian\\theater-management-app-Adrian\\teatr\\teatr\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
