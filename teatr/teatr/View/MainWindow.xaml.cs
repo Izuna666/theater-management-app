@@ -24,6 +24,7 @@ namespace okno_logowania.View
             LoadDataIntoGrid();
             LoadDataToComobox();
             combobox1.SelectionChanged += combobox1_SelectionChanged;
+            
         }
 
         private void LoadDataToComobox()
@@ -47,8 +48,6 @@ namespace okno_logowania.View
                 txtMiejsca.Text = selectedSala.LiczbaMiejsc;
             }
         }
-
-
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -148,18 +147,6 @@ namespace okno_logowania.View
             }
 
         }
-        private void LoadDataintoTextBox()
-        {
-            if(dataGrid1.SelectedItem != null)
-            {
-                Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
-                txtGodzina.Text = selectedRepertuar.Godzina;
-                combobox1.Text = selectedRepertuar.Sala;
-                txtNazwa.Text = selectedRepertuar.Nazwa;
-                txtLiczba.Text = selectedRepertuar.LiczbaMiejsc;
-                txtCena.Text = selectedRepertuar.Cena;
-            }
-        }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
@@ -182,11 +169,9 @@ namespace okno_logowania.View
         private void ClearText()
         {
             txtGodzina.Clear();
-            //txtSala.Clear();
             txtNazwa.Clear();
             txtLiczba.Clear();
             txtCena.Clear();
         }
-
     }
 }

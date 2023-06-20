@@ -73,13 +73,13 @@
                         Grid.Column="1"
                         Orientation="Vertical"
                         Margin="0,35,0,0">
-                <TextBlock Text="Teatr"
+                <TextBlock Text="Teatr Whatever"
                            Foreground="White"
                            FontSize="25"
                            FontWeight="Medium"
                            FontFamily="Monterrat"
                            HorizontalAlignment="Center"/>
-                <TextBlock Text="log in to be able to use this management application"
+                <TextBlock Text="zaloguj się aby móc korzystać z aplikacji"
                            Foreground="LightGray"
                            FontSize="12"
                            FontWeight="Medium"
@@ -87,7 +87,7 @@
                            TextWrapping="Wrap"
                            TextAlignment="Center"
                            Margin="0,5,0,0"/>
-                <TextBlock Text="Username"
+                <TextBlock Text="nazwa użytkownika"
                            Foreground="DarkGray"
                            FontSize="12"
                            FontWeight="Medium"
@@ -112,7 +112,7 @@
                     </TextBox.Background>
                 </TextBox>
 
-                <TextBlock Text="Password"
+                <TextBlock Text="hasło"
                            Foreground="DarkGray"
                            FontSize="12"
                            FontWeight="Medium"
@@ -140,7 +140,7 @@
                 <Button x:Name="btnLogin"
                     Background="Transparent"
                     BorderThickness="0"
-                    Content="LOG IN"
+                    Content="ZALOGUJ"
                     Foreground="White"
                     FontSize="16"
                     FontFamily="Monterrat"

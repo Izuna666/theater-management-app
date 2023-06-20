@@ -100,7 +100,7 @@
                 <Button x:Name="btnGoBack"
                     Background="Transparent"
                     BorderThickness="0"
-                    Content= "Log out"
+                    Content= "WYLOGUJ"
                     Foreground="White"
                     FontSize="16"
                     FontFamily="Monterrat"
@@ -211,7 +211,7 @@
                          Background="Transparent" Cursor="">
                 </TextBox>
 
-                <TextBlock Text="salaa:"
+                <TextBlock Text="sala:"
                            Foreground="White"
                            FontSize="16"
                            FontWeight="Medium"
@@ -246,7 +246,7 @@
                         Orientation="Vertical"
                         HorizontalAlignment="Center"
                         Margin="150,0,0,0">
-                <TextBlock Text="Data:"
+                <TextBlock Text="data:"
                            Foreground="White"
                            Width="150"
                            FontSize="16"
@@ -254,21 +254,15 @@
                            FontFamily="Monterrat"
                            Margin="0,0,0,0"/>
 
-                <TextBox x:Name="txtData"
-                         FontSize="16"
-                         Width="150"
-                         FontWeight="Medium"
-                         FontFamily="Monterrat"
-                         Foreground="White"
-                         CaretBrush="LightGray"
-                         BorderThickness="0,0,0,1"
-                         Height="25"
-                         VerticalContentAlignment="Center"
-                         Margin="0,0,0,0"
-                         Padding="0,0,0,0" BorderBrush="DarkGray"
-                         Background="Transparent" Cursor=""/>
+                
+                <DatePicker FontSize="14"
+                            Width="150"
+                            Margin="0,0,0,0"
+                            Height="25"
+                            
+                            />
 
-                <TextBlock Text="Dostępne miejsca:"
+                <TextBlock Text="dostępne miejsca:"
                            Foreground="White"
                            Width="150"
                            FontSize="16"
@@ -290,6 +284,7 @@
                          Padding="0,0,0,0" BorderBrush="DarkGray"
                          Background="Transparent"/>
 
+
             </StackPanel>
             
             <StackPanel Width="400"
@@ -300,7 +295,7 @@
                 <Button x:Name="btnAdd"
                     Background="Transparent"
                     BorderThickness="3"
-                    Content="Add"
+                    Content="Dodaj"
                     Foreground="White"
                     FontSize="20"
                     FontFamily="Monterrat"
@@ -320,7 +315,7 @@
                 <Button x:Name="btnUpdate"
                     Background="Transparent"
                     BorderThickness="3"
-                    Content="Update"
+                    Content="Aktualizuj"
                     Foreground="White"
                     FontSize="20"
                     FontFamily="Monterrat"
@@ -340,7 +335,7 @@
                 <Button x:Name="btnRemove"
                     Background="Transparent"
                     BorderThickness="3"
-                    Content="Remove"
+                    Content="Usuń"
                     Foreground="White"
                     FontSize="20"
                     FontFamily="Monterrat"
@@ -379,7 +374,7 @@
 
             </StackPanel>
 
-                <!-- buttons for adding data to our DATABASE-->
+                
 
             <StackPanel Width="450"
                         Grid.Column="3"
@@ -409,7 +404,7 @@
                           AutoGenerateColumns="False"
                           SelectionMode="Single" Cursor="">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header=" Select ">
+                        <DataGridTemplateColumn Header="  ">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
