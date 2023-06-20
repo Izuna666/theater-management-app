@@ -13,6 +13,7 @@ public class Repertuar
     /*public bool IsSelected { get; set; }*/
     public int ID { get; set; }
     public string? Godzina { get; set; }
+    public string? Data { get; set; }
     public string? Sala { get; set; }
     public string? Nazwa { get; set; }
     public string? LiczbaMiejsc { get; set; }
@@ -29,8 +30,8 @@ public class RepertuarRepository
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            string query = "INSERT INTO repertuar ( godzina, sala, nazwa, liczbaMiejsc, cena) " +
-            $"VALUES ('{repertuar.Godzina}', '{repertuar.Sala}', '{repertuar.Nazwa}', '{repertuar.LiczbaMiejsc}', '{repertuar.Cena}')";
+            string query = "INSERT INTO repertuar ( godzina, data, sala, nazwa, liczbaMiejsc, cena) " +
+            $"VALUES ('{repertuar.Godzina}','{repertuar.Data}', '{repertuar.Sala}', '{repertuar.Nazwa}', '{repertuar.LiczbaMiejsc}', '{repertuar.Cena}')";
             MySqlCommand createCommand = new MySqlCommand(query, connection);
             createCommand.ExecuteNonQuery();
         }
@@ -52,7 +53,7 @@ public class RepertuarRepository
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             connection.Open();            
-            string query = $"UPDATE repertuar SET godzina = '{repertuar.Godzina}', sala = '{repertuar.Sala}', nazwa= '{repertuar.Nazwa}', liczbaMiejsc= '{repertuar.LiczbaMiejsc}', cena= '{repertuar.Cena}' WHERE ID = {ID}";
+            string query = $"UPDATE repertuar SET godzina = '{repertuar.Godzina}', data = '{repertuar.Data}', sala = '{repertuar.Sala}', nazwa= '{repertuar.Nazwa}', liczbaMiejsc= '{repertuar.LiczbaMiejsc}', cena= '{repertuar.Cena}' WHERE ID = {ID}";
             MySqlCommand createCommand = new MySqlCommand(query, connection);
             createCommand.ExecuteNonQuery();
         }
@@ -65,7 +66,7 @@ public class RepertuarRepository
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            string query = "SELECT ID, godzina, sala, nazwa, liczbaMiejsc, cena FROM repertuar";
+            string query = "SELECT ID, godzina, data, sala, nazwa, liczbaMiejsc, cena FROM repertuar";
             MySqlCommand createCommand = new MySqlCommand(query, connection);
             using (MySqlDataReader reader = createCommand.ExecuteReader())
             {
@@ -75,6 +76,7 @@ public class RepertuarRepository
                     {
                         ID = reader.GetInt16("ID"),
                         Godzina = reader.GetString("godzina"),
+                        Data = reader.GetString("data"),
                         Sala = reader.GetString("sala"),
                         Nazwa = reader.GetString("nazwa"),
                         LiczbaMiejsc = reader.GetString("liczbaMiejsc"),

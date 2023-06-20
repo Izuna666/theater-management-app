@@ -255,7 +255,7 @@
                            Margin="0,0,0,0"/>
 
                 
-                <DatePicker FontSize="14"
+                <DatePicker x:Name="datePicker" FontSize="14"
                             Width="150"
                             Margin="0,0,0,0"
                             Height="25"
@@ -412,6 +412,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header=" Godzina " Binding="{Binding Path=Godzina}" />
+                        <DataGridTextColumn Header=" Data " Binding="{Binding Path=Data}" />
                         <DataGridTextColumn Header=" Sala " Binding="{Binding Path=Sala}" />
                         <DataGridTextColumn Header=" Nazwa " Binding="{Binding Path=Nazwa}" />
                         <DataGridTextColumn Header=" Liczba miejsc " Binding="{Binding Path=LiczbaMiejsc}" />
