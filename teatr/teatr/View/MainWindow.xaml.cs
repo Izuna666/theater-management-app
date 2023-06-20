@@ -79,7 +79,7 @@ namespace okno_logowania.View
                 Repertuar repertuar = new Repertuar()
                 {
                     Godzina = txtGodzina.Text,
-                    Data = datePicker.SelectedDate.ToString(),
+                    Data = datePicker.SelectedDate.Value.Date.ToShortDateString(),
                     Sala = combobox1.Text,
                     Nazwa = txtNazwa.Text,
                     LiczbaMiejsc = txtLiczba.Text,
@@ -108,7 +108,7 @@ namespace okno_logowania.View
                     Repertuar updatedRepertuar = new Repertuar()
                     {
                         Godzina = txtGodzina.Text,
-                        Data = datePicker.SelectedDate.ToString(),
+                        Data = datePicker.SelectedDate.Value.Date.ToShortDateString(),
                         Sala = combobox1.Text,
                         Nazwa = txtNazwa.Text,
                         LiczbaMiejsc = txtLiczba.Text,
