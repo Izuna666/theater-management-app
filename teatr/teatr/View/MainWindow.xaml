@@ -234,6 +234,7 @@
                             AlignmentX="Left"/>
                     </TextBox.Background>
                 </TextBox>
+                
                 <TextBlock Text="sala:"
                            Foreground="White"
                            FontSize="16"
@@ -331,7 +332,6 @@
                 </TextBox>
 
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1"/>
 
             <DataGrid x:Name="dataGrid1" 
                       ColumnHeaderStyle="{StaticResource HeaderStyle}"
