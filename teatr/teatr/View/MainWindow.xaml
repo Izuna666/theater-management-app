@@ -151,21 +151,10 @@
                            FontWeight="Medium"
                            FontFamily="Monterrat"
                            Margin="0,0,0,0"/>
-                <TextBox x:Name="txtGodzina"
-                         Width="150"
-                         HorizontalAlignment="Left"
-                         FontSize="16"
-                         FontWeight="Medium"
-                         FontFamily="Monterrat"
-                         Foreground="White"
-                         CaretBrush="LightGray"
-                         BorderThickness="0,0,0,1"
-                         Height="25"
-                         VerticalContentAlignment="Center"
-                         Margin="0,0,0,0"
-                         Padding="0,0,0,0" BorderBrush="DarkGray"
-                         Background="Transparent">
-                </TextBox>
+                <ComboBox Name="combobox2"
+                          Height="25"
+                          Width="150"
+                          HorizontalAlignment="Left"/>
 
                 <TextBlock Text="liczba miejsc:"
                            Foreground="White"
@@ -239,6 +228,15 @@
                          Padding="0,0,0,0" BorderBrush="DarkGray"
                          Background="Transparent">
                 </TextBox>
+                <TextBlock x:Name ="warning"
+                           Height="50"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Foreground="Red"
+                           FontSize="16"
+                           FontWeight="Medium"
+                           FontFamily="Monterrat"
+                           Margin="0,15,0,0"/>
 </StackPanel>
             <StackPanel Width="150"
                         Grid.Column="1"
@@ -254,8 +252,9 @@
                            FontFamily="Monterrat"
                            Margin="0,0,0,0"/>
 
-                
-                <DatePicker x:Name="datePicker" FontSize="14"
+
+                <DatePicker x:Name="datePicker"
+                            FontSize="14"
                             Width="150"
                             Margin="0,0,0,0"
                             Height="25"
@@ -413,8 +412,8 @@
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header=" Godzina " Binding="{Binding Path=Godzina}" />
                         <DataGridTextColumn Header=" Data " Binding="{Binding Path=Data}" />
-                        <DataGridTextColumn Header=" Sala " Binding="{Binding Path=Sala}" />
                         <DataGridTextColumn Header=" Nazwa " Binding="{Binding Path=Nazwa}" />
+                        <DataGridTextColumn Header=" Sala " Binding="{Binding Path=Sala}" />
                         <DataGridTextColumn Header=" Liczba miejsc " Binding="{Binding Path=LiczbaMiejsc}" />
                         <DataGridTextColumn Header=" Cena " Binding="{Binding Path=Cena}" />
                     </DataGrid.Columns>

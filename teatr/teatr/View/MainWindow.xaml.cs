@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,14 +19,27 @@ namespace okno_logowania.View
         public MainWindow()
         {
             InitializeComponent();
-            txtGodzina.Focus();
+            //txtGodzina.Focus();
             repertuarRepository = new RepertuarRepository();
             saleRepository = new SaleRepository();
             LoadDataIntoGrid();
+            GodzinaCombobox();
             LoadDataToComobox();
             combobox1.SelectionChanged += combobox1_SelectionChanged;
             
         }
+        private void GodzinaCombobox()
+        {
+            List<string> godziny = new List<string>()
+            {
+                "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
+            };
+            foreach (string item in godziny)
+            {
+                combobox2.Items.Add(item);
+            }
+        }
+
 
         private void LoadDataToComobox()
         {
@@ -40,6 +54,7 @@ namespace okno_logowania.View
                 MessageBox.Show("Error");
             }
         }
+
 
         private void combobox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -72,22 +87,96 @@ namespace okno_logowania.View
             Application.Current.Shutdown();
         }
 
+        private bool checkMaxSeats()
+        {
+            if (Convert.ToInt32(txtLiczba.Text) > Convert.ToInt32(txtMiejsca.Text))
+            {
+                //warning.Text = "wartosc przekracza ilosc dostepnych miejsc";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool checkSale() //sprawdza najpierw date jesli taka sama to sprawdza sale jesli taka sama to godzine 
+        {
+            List<string> columnValuesSala = new List<string>();
+            List<string> columnValuesData = new List<string>();
+            List<string> columnValuesGodzina = new List<string>();
+
+            foreach (var item in dataGrid1.Items)
+            {
+                var CustomItemSala = (Repertuar)item;
+                string value = CustomItemSala.Sala;
+                columnValuesSala.Add(value.ToString());
+            }
+            foreach (var item in dataGrid1.Items)
+            {
+                var CustomItemData = (Repertuar)item;
+                string value = CustomItemData.Data;
+                columnValuesData.Add(value.ToString());
+            }
+            foreach (var item in dataGrid1.Items)
+            {
+                var CustomItemGodzina = (Repertuar)item;
+                string value = CustomItemGodzina.Godzina;
+                columnValuesGodzina.Add(value.ToString());
+            }
+            string word1 = combobox1.Text;
+            string word2 = datePicker.SelectedDate.Value.Date.ToShortDateString();
+            string word3 = combobox2.Text;
+            if (columnValuesData.Contains(word2))
+            {
+                if (columnValuesSala.Contains(word1))
+                {
+                    if (columnValuesGodzina.Contains(word3))
+                    {
+                        //warning.Text = "Sala jest juz zarezerwowana";
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 Repertuar repertuar = new Repertuar()
                 {
-                    Godzina = txtGodzina.Text,
+                    Godzina = combobox2.Text,
                     Data = datePicker.SelectedDate.Value.Date.ToShortDateString(),
                     Sala = combobox1.Text,
                     Nazwa = txtNazwa.Text,
                     LiczbaMiejsc = txtLiczba.Text,
                     Cena = txtCena.Text
                 };
+                //checkMaxSeats();
+                bool sprawdz = checkSale();
+                bool sprawdz2 = checkMaxSeats();
+                if (sprawdz == true)
+                {
+                    warning.Text = "Sala jest już zarezerwowana";
+                }
+                else if (sprawdz2 ==true)
+                {
+                    warning.Text = "wartość przekracza ilość dostępnych miejsc";
+                }
+                else
+                {
+                    repertuarRepository.AddRepertuar(repertuar);
+                    warning.Text = "repertuar dodany";
+                    ClearText();
+                }
 
-                repertuarRepository.AddRepertuar(repertuar);
-                ClearText();
             }
             catch (Exception ex)
             {
@@ -107,7 +196,7 @@ namespace okno_logowania.View
                     Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
                     Repertuar updatedRepertuar = new Repertuar()
                     {
-                        Godzina = txtGodzina.Text,
+                        Godzina = combobox2.Text,
                         Data = datePicker.SelectedDate.Value.Date.ToShortDateString(),
                         Sala = combobox1.Text,
                         Nazwa = txtNazwa.Text,
@@ -136,6 +225,7 @@ namespace okno_logowania.View
                 {
                     Repertuar selectedRepertuar = (Repertuar)dataGrid1.SelectedItem;
                     repertuarRepository.RemoveRepertuar(selectedRepertuar.ID);
+                    warning.Text = "repertuar usuniety";
                     ClearText();
                 }
             }
@@ -170,7 +260,6 @@ namespace okno_logowania.View
 
         private void ClearText()
         {
-            txtGodzina.Clear();
             txtNazwa.Clear();
             txtLiczba.Clear();
             txtCena.Clear();
